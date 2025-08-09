@@ -1,15 +1,15 @@
-FROM eclipse-temurin:21-jdk-alpine
+# Stage 1: Build the application
+FROM eclipse-temurin:21-jdk-alpine AS builder
 
-# Copy everything into the container
+WORKDIR /app
 COPY . .
-
-# Make mvnw executable
 RUN chmod +x mvnw
-
-# Build the jar inside the container
 RUN ./mvnw clean package -DskipTests
 
-# Run the jar
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+# Stage 2: Run the application
+FROM eclipse-temurin:21-jdk-alpine
+
+WORKDIR /app
+COPY --from=builder /app/target/*.jar app.jar
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
