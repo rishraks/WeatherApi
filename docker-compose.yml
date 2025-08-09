@@ -1,0 +1,10 @@
+services:
+  spring-boot:
+    image: weather-forecast
+    env_file:
+      - ./.env
+    build: .
+    container_name: weather-forecast-backend
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
