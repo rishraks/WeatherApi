@@ -9,7 +9,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000","https://weather-forecast-frontend-nine.vercel.app/weather-forecast")
+                .allowedOrigins("http://localhost:3000","https://weather-forecast-frontend-liart.vercel.app/weather-forecast")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Add OPTIONS!
                 .allowedHeaders("*")
                 .allowCredentials(true)
